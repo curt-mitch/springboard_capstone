@@ -1,2 +1,3 @@
 # springboard_capstone
-Springboard capstone project repository
+Project repository for Springboard Machine Learning engineering track beginning May, 2020
+
