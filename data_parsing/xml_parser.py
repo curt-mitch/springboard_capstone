@@ -36,4 +36,26 @@ for paragraph in paragraph_els:
         if (attrs.get('type') == 'trans' and attrs.get('ver') == '2'):
           par_props[par_key][sentence_key]['e'] = child.text
 
-print(json.dumps(par_props, ensure_ascii=False).encode('utf8').decode())
+# get section values
+section_els = root.findall('sec')
+sec_props = {}
+for section in section_els:
+  sec_key = 'sec-{}'.format(section.attrib['id'])
+  sec_props[sec_key] = {}
+  paragraphs = section.findall('par')
+  for paragraph in paragraphs:
+    par_key = 'par-{}'.format(paragraph.attrib['id'])
+    sec_props[sec_key][par_key] = {}
+    for sentence in paragraph:
+      sentence_key = 'sen-{}'.format(sentence.attrib['id'])
+      sec_props[sec_key][par_key][sentence_key] = {}
+      for child in sentence:
+        if (child.tag == 'j'):
+          sec_props[sec_key][par_key][sentence_key]['j'] = child.text
+        if (child.tag == 'e'):
+          attrs = child.attrib
+          if (attrs.get('type') == 'trans' and attrs.get('ver') == '2'):
+            sec_props[sec_key][par_key][sentence_key]['e'] = child.text
+
+# print(len(section_els))
+print(json.dumps(sec_props, ensure_ascii=False).encode('utf8').decode())
