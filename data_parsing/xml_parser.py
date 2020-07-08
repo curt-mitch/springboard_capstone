@@ -30,8 +30,8 @@ for paragraph in paragraph_els:
   for sentence in paragraph:
     sentence_key = 'sen-{}'.format(sentence.attrib['id'])
     par_props[par_key][sentence_key] = {}
+    sentence_example = {}
     for child in sentence:
-      sentence_example = {}
       if (child.tag == 'j'):
         sentence_example['j'] = child.text
       if (child.tag == 'e'):
@@ -53,8 +53,8 @@ for section in section_els:
     for sentence in paragraph:
       sentence_key = 'sen-{}'.format(sentence.attrib['id'])
       sec_props[sec_key][par_key][sentence_key] = {}
+      sentence_example = {}
       for child in sentence:
-        sentence_example = {}
         if (child.tag == 'j'):
           sentence_example['j'] = child.text
         if (child.tag == 'e'):
@@ -63,5 +63,5 @@ for section in section_els:
             sentence_example['e'] = child.text
             sentence_pairs.append(sentence_example)
 
-print(len(sentence_pairs))
-print(json.dumps(sentence_pairs, ensure_ascii=False).encode('utf8').decode())
+with open('sentence_pairs.json', 'w', encoding='utf-8') as f:
+    json.dump(sentence_pairs, f, ensure_ascii=False, indent=4)
