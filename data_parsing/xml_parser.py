@@ -6,6 +6,7 @@ dirname = os.path.dirname(__file__)
 filename = os.path.join(dirname, './../datasets/japanese_english_bilingual_corpus_wikipedia_kyoto/BDS00389.xml')
 tree = ET.parse(filename)
 root = tree.getroot()
+sentence_pairs = []
 
 # get title values
 title_els = root.findall('tit')
@@ -18,6 +19,7 @@ for titles in title_els:
       attrs = child.attrib
       if (attrs.get('type') == 'trans' and attrs.get('ver') == '2'):
         title_props['e'] = child.text
+sentence_pairs.append(title_props)
 
 # get paragraph values
 paragraph_els = root.findall('par')
@@ -29,12 +31,14 @@ for paragraph in paragraph_els:
     sentence_key = 'sen-{}'.format(sentence.attrib['id'])
     par_props[par_key][sentence_key] = {}
     for child in sentence:
+      sentence_example = {}
       if (child.tag == 'j'):
-        par_props[par_key][sentence_key]['j'] = child.text
+        sentence_example['j'] = child.text
       if (child.tag == 'e'):
         attrs = child.attrib
         if (attrs.get('type') == 'trans' and attrs.get('ver') == '2'):
-          par_props[par_key][sentence_key]['e'] = child.text
+          sentence_example['e'] = child.text
+          sentence_pairs.append(sentence_example)
 
 # get section values
 section_els = root.findall('sec')
@@ -50,12 +54,14 @@ for section in section_els:
       sentence_key = 'sen-{}'.format(sentence.attrib['id'])
       sec_props[sec_key][par_key][sentence_key] = {}
       for child in sentence:
+        sentence_example = {}
         if (child.tag == 'j'):
-          sec_props[sec_key][par_key][sentence_key]['j'] = child.text
+          sentence_example['j'] = child.text
         if (child.tag == 'e'):
           attrs = child.attrib
           if (attrs.get('type') == 'trans' and attrs.get('ver') == '2'):
-            sec_props[sec_key][par_key][sentence_key]['e'] = child.text
+            sentence_example['e'] = child.text
+            sentence_pairs.append(sentence_example)
 
-# print(len(section_els))
-print(json.dumps(sec_props, ensure_ascii=False).encode('utf8').decode())
+print(len(sentence_pairs))
+print(json.dumps(sentence_pairs, ensure_ascii=False).encode('utf8').decode())
