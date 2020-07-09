@@ -93,7 +93,7 @@ for data_dir in dir_list:
       directory_sentence_list = directory_sentence_list + file_sentences
   sentence_list_collection.append(directory_sentence_list)
 
-# flatten complete_sentence_list
+# flatten sentence_list_collection and write to JSON file
 complete_sentence_list = [item for sublist in sentence_list_collection for item in sublist]
 with open('sentence_pairs.json', 'w', encoding='utf-8') as f:
     json.dump(complete_sentence_list, f, ensure_ascii=False, indent=4)
