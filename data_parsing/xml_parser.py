@@ -63,9 +63,6 @@ def parse_file(filename):
               sentence_pairs.append(sentence_example)
   return sentence_pairs
 
-# with open('sentence_pairs.json', 'w', encoding='utf-8') as f:
-#     json.dump(sentence_pairs, f, ensure_ascii=False, indent=4)
-
 current_dir = os.path.dirname(__file__)
 datasets_dir = os.path.join(current_dir, './../datasets/japanese_english_bilingual_corpus_wikipedia_kyoto/wiki_corpus_2.01')
 bds_dir = os.path.join(datasets_dir, 'BDS')
@@ -86,6 +83,7 @@ ttl_dir = os.path.join(datasets_dir, 'TTL')
 
 dir_list = [bds_dir, bld_dir, clt_dir, epr_dir, fml_dir, gnm_dir, hst_dir, ltt_dir,
             pnm_dir, rlw_dir, rod_dir, sat_dir, scl_dir, snt_dir, ttl_dir]
+sentence_list_collection = []
 
 for data_dir in dir_list:
   directory_sentence_list = []
@@ -93,4 +91,9 @@ for data_dir in dir_list:
     for file in files:
       file_sentences = parse_file(os.path.join(subdir, file))
       directory_sentence_list = directory_sentence_list + file_sentences
-  print(len(directory_sentence_list))
+  sentence_list_collection.append(directory_sentence_list)
+
+# flatten complete_sentence_list
+complete_sentence_list = [item for sublist in sentence_list_collection for item in sublist]
+with open('sentence_pairs.json', 'w', encoding='utf-8') as f:
+    json.dump(complete_sentence_list, f, ensure_ascii=False, indent=4)
