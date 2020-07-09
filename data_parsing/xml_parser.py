@@ -69,11 +69,28 @@ def parse_file(filename):
 current_dir = os.path.dirname(__file__)
 datasets_dir = os.path.join(current_dir, './../datasets/japanese_english_bilingual_corpus_wikipedia_kyoto/wiki_corpus_2.01')
 bds_dir = os.path.join(datasets_dir, 'BDS')
+bld_dir = os.path.join(datasets_dir, 'BLD')
+clt_dir = os.path.join(datasets_dir, 'CLT')
+epr_dir = os.path.join(datasets_dir, 'EPR')
+fml_dir = os.path.join(datasets_dir, 'FML')
+gnm_dir = os.path.join(datasets_dir, 'GNM')
+hst_dir = os.path.join(datasets_dir, 'HST')
+ltt_dir = os.path.join(datasets_dir, 'LTT')
+pnm_dir = os.path.join(datasets_dir, 'PNM')
+rlw_dir = os.path.join(datasets_dir, 'RLW')
+rod_dir = os.path.join(datasets_dir, 'ROD')
+sat_dir = os.path.join(datasets_dir, 'SAT')
+scl_dir = os.path.join(datasets_dir, 'SCL')
+snt_dir = os.path.join(datasets_dir, 'SNT')
+ttl_dir = os.path.join(datasets_dir, 'TTL')
 
-for subdir, dirs, files in os.walk(bds_dir):
+dir_list = [bds_dir, bld_dir, clt_dir, epr_dir, fml_dir, gnm_dir, hst_dir, ltt_dir,
+            pnm_dir, rlw_dir, rod_dir, sat_dir, scl_dir, snt_dir, ttl_dir]
+
+for data_dir in dir_list:
   directory_sentence_list = []
-  print(len(files))
-  for file in files:
-    file_sentences = parse_file(os.path.join(subdir, file))
-    directory_sentence_list = directory_sentence_list + file_sentences
+  for subdir, dirs, files in os.walk(data_dir):
+    for file in files:
+      file_sentences = parse_file(os.path.join(subdir, file))
+      directory_sentence_list = directory_sentence_list + file_sentences
   print(len(directory_sentence_list))
