@@ -96,4 +96,4 @@ for data_dir in dir_list:
 # flatten sentence_list_collection and write to JSON file
 complete_sentence_list = [item for sublist in sentence_list_collection for item in sublist]
 with open('kyoto_corpus.json', 'w', encoding='utf-8') as f:
-    json.dump(complete_sentence_list, f, ensure_ascii=False, indent=4)
+    json.dump(complete_sentence_list, f, ensure_ascii=False, separators=(',', ":"))
