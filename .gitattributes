@@ -4,3 +4,4 @@
 datasets/japanese_english_bilingual_corpus_wikipedia_kyoto/ filter=lfs diff=lfs merge=lfs -text
 *.json filter=lfs diff=lfs merge=lfs -text
 jesc-corpus.txt filter=lfs diff=lfs merge=lfs -text
+subtitle_corpus.json filter=lfs diff=lfs merge=lfs -text
