@@ -1,8 +1,10 @@
 # Machine translation - text
-Feature goal: translating Japanese-English Wikipedia documents about Kyoto
-The dataset features translations of Wikipedia articles covering various topics related to the city of Kyoto
+Feature goal: Building a Japanese -> English translation model
+The primary dataset is a Japanese-English Subtitle corpus hosted by Stanford's NLP program: https://nlp.stanford.edu/projects/jesc/
+
+A separate dataset features translations of Wikipedia articles covering various topics related to the city of Kyoto
 Dataset: https://www.kaggle.com/team-ai/japaneseenglish-bilingual-corpus
-(dataset contained in this directory as well)
+(both datasets contained in this directory as well)
 
 # Machine translation - voice
 Feature goal: translating English audio into Japanese audio
